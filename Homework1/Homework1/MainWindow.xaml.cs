@@ -24,5 +24,10 @@ namespace Homework1
         {
             InitializeComponent();
         }
+
+        private void uxSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Submitting password:" + uxPassword.Text);
+        }
     }
 }

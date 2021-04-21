@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="350" Width="525">
 
-    </Grid>
+    <StackPanel Grid.Column="0">
+        <TextBlock>Enter Name:</TextBlock>
+        <TextBox x:Name="uxName"></TextBox>
+        <TextBlock>Enter Password:</TextBlock>
+        <TextBox x:Name="uxPassword"></TextBox>
+        <Button x:Name="uxSubmit" Click="uxSubmit_Click">Submit</Button>
+    </StackPanel>
 </Window>
