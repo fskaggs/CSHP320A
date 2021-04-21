@@ -29,5 +29,17 @@ namespace Homework1
         {
             MessageBox.Show("Submitting password:" + uxPassword.Text);
         }
+
+        private void ux_InputRecieved(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(uxName.Text) && !string.IsNullOrEmpty(uxPassword.Text))
+            {
+                uxSubmit.IsEnabled = true;
+            }
+            else
+            {
+                uxSubmit.IsEnabled = false;
+            }
+        }
     }
 }
