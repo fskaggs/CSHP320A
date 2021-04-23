@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//CSHP320A
+//Frederick J. Skaggs - Homework 1
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Homework1
 {
@@ -45,7 +37,7 @@ namespace Homework1
                 int upperScore = password.Where(x => char.IsUpper(x)).Count<char>() > 0 ? 10 : 0;
                 int lowerScore = password.Where(x => char.IsLower(x)).Count<char>() > 0 ? 10 : 0;
                 int digitScore = password.Where(x => char.IsDigit(x)).Count<char>() > 0 ? 10 : 0;
-                passwordStrength = Math.Clamp(password.Length, 0, 20) + upperScore + lowerScore + digitScore;
+                passwordStrength = Math.Min(20, password.Length) + upperScore + lowerScore + digitScore;
                 progBarPwdStr.Value = passwordStrength;
             }
 
