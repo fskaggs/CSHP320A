@@ -11,18 +11,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
-    <!--<StackPanel Margin="5, 5">
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <TextBlock Text="Enter Name:" Margin="5, 0"/>
-            <TextBox x:Name="uxName" TextChanged="ux_InputRecieved" Width="200" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <TextBlock Margin="5, 0" Text="Enter Password:" />
-            <TextBox x:Name="uxPassword" TextChanged="ux_InputRecieved" Width="200"/>
-        </StackPanel>
-        <Button x:Name="uxSubmit" HorizontalAlignment="Center" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
-    </StackPanel>-->
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
