@@ -21,22 +21,25 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+            <!--<RowDefinition Height="5*" />-->
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
             <TextBlock Text="Enter Name:" Margin="5" />
             <TextBlock Text="Enter Password:" Margin="5" />
+            <TextBlock Text="Password Strength:" Margin="5" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Margin="5">
             <TextBox x:Name="uxName" TextChanged="ux_InputRecieved" Margin="5" />
             <TextBox x:Name="uxPassword" TextChanged="ux_InputRecieved" Margin="5" />
+            <ProgressBar x:Name="progBarPwdStr" Minimum="0" Maximum="50" Width="300" Height="20" HorizontalAlignment="Left" Margin="5,0"/>
         </StackPanel>
-        <Button x:Name="uxSubmit" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
+        <Button x:Name="uxSubmit" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
     </Grid>
 </Window>
