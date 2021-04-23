@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
-    <StackPanel Grid.Column="0" Margin="5, 5">
+    <!--<StackPanel Margin="5, 5">
         <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock Text="Enter Name:" Margin="5, 0"/>
             <TextBox x:Name="uxName" TextChanged="ux_InputRecieved" Width="200" />
@@ -16,6 +16,27 @@
             <TextBlock Margin="5, 0" Text="Enter Password:" />
             <TextBox x:Name="uxPassword" TextChanged="ux_InputRecieved" Width="200"/>
         </StackPanel>
-        <Button x:Name="uxSubmit" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
-    </StackPanel>
+        <Button x:Name="uxSubmit" HorizontalAlignment="Center" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
+    </StackPanel>-->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
+            <TextBlock Text="Enter Name:" Margin="5" />
+            <TextBlock Text="Enter Password:" Margin="5" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="5">
+            <TextBox x:Name="uxName" TextChanged="ux_InputRecieved" Margin="5" />
+            <TextBox x:Name="uxPassword" TextChanged="ux_InputRecieved" Margin="5" />
+        </StackPanel>
+        <Button x:Name="uxSubmit" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="uxSubmit_Click" IsEnabled="False" Margin="10">Submit</Button>
+    </Grid>
 </Window>
