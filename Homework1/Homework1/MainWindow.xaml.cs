@@ -23,11 +23,12 @@ namespace Homework1
         public MainWindow()
         {
             InitializeComponent();
+            uxName.Focus();
         }
 
         private void uxSubmit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Submitting password:" + uxPassword.Text);
+            MessageBox.Show($"Hello, {uxName.Text}\nYou entered password: {uxPassword.Text}");
         }
 
         private void ux_InputRecieved(object sender, TextChangedEventArgs e)
