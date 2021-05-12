@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Homework4.Models;
+using System.Windows;
 
 namespace Homework4
 {
@@ -7,9 +8,12 @@ namespace Homework4
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ZipCode zipCode = new ZipCode();
+
         public MainWindow()
         {
             InitializeComponent();
+            stackPanelZipCode.DataContext = zipCode;
         }
     }
 }

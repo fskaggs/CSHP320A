@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <TextBox x:Name="tbZipCode" Width="100" HorizontalAlignment="Left" Margin="10, 5" Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-            <Button x:Name="btnZipCode" Content="Button" Width="100" HorizontalAlignment="Left" IsEnabled="False" Margin="10, 5"/>
+        <StackPanel x:Name="stackPanelZipCode">
+            <TextBox x:Name="tbZipCode" Width="100" HorizontalAlignment="Left" Margin="10, 5" Text="{Binding PostCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            <Button x:Name="btnZipCode" Content="Button" Width="100" HorizontalAlignment="Left" Margin="10, 5" IsEnabled="{Binding ButtonState, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Window>
