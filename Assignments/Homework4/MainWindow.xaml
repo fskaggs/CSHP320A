@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel x:Name="stackPanelZipCode">
-            <TextBox x:Name="tbZipCode" Width="100" HorizontalAlignment="Left" Margin="10, 5" Text="{Binding PostCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-            <Button x:Name="btnZipCode" Content="Button" Width="100" HorizontalAlignment="Left" Margin="10, 5" IsEnabled="{Binding ButtonState, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="tbZipCode" TextChanged="tbZipCode_TextChanged" Width="100" HorizontalAlignment="Left" Margin="10, 5" />
+            <Button x:Name="btnZipCode" Content="Button" Width="100" HorizontalAlignment="Left" Margin="10, 5" IsEnabled="False" />
         </StackPanel>
     </Grid>
 </Window>
