@@ -20,6 +20,7 @@ namespace Homework4
             Regex regexPostCode = new Regex(@"^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$");
             string postCode = tbZipCode.Text.ToUpper();
             
+            // If there is content, compare against the US and Canadian regular expressions for zip/potal codes
             if (string.IsNullOrEmpty(postCode) == false)
             {
                 code = regexZipCode.IsMatch(postCode) | regexPostCode.IsMatch(postCode);
