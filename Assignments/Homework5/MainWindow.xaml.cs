@@ -60,7 +60,7 @@ namespace Homework5
 
             foreach(Button btn in btnList)
             {
-                btn.Content = "";
+                btn.Content = string.Empty;
                 btn.IsEnabled = true;
             }
         }
@@ -135,6 +135,12 @@ namespace Homework5
         {
             // Get the button and mark the player to pressed it
             Button btn = sender as Button;
+            
+            // Illegal press if button already used
+            if (btn.Content.ToString() != string.Empty)
+                return;
+                
+            // Mark the button for the player who pressed it
             btn.Content = playerChar[turn % 2];
 
             // Get the row and column of the button and update the game board tracking matrix
