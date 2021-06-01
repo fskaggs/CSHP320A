@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirewallRulesTracker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace FirewallRulesTracker
         public MainWindow()
         {
             InitializeComponent();
+
+            FirewallRulesViewModel ViewModel = new FirewallRulesViewModel();
+            DataContext = ViewModel;
+            uxRuleList.DataContext = ViewModel.FWRules;
+            uxRuleList.ItemsSource = ViewModel.FWRules;
         }
     }
 }

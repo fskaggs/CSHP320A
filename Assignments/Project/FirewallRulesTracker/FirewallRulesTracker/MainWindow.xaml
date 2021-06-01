@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <ListView x:Name="uxRuleList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding FWRuleID}" Header="Rule ID" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Direction}" Header="Protocol Direction" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Protocol}" Header="Protocol" Width="50" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Port}" Header="Port" Width="50" />
+                    <GridViewColumn DisplayMemberBinding="{Binding SRA}" Header="SRA" Width="50" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
