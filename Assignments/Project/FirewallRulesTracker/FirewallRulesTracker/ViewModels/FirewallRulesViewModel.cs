@@ -4,22 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repository;
+using Repository.Models;
 
 namespace FirewallRulesTracker.ViewModels
 {
     public class FirewallRulesViewModel
     {
-        FirewallRulesContext fwDbContext = null;
+        readonly FWRuleRepository fwRepo;
 
         public FirewallRulesViewModel()
         {
-            fwDbContext = new FirewallRulesContext();
+            fwRepo = new FWRuleRepository();
 
             //FWService = fwDbContext.Services.ToList<Service>();
-            FWRules = fwDbContext.Rules.ToList<FWRule>();
+            FWRules = (List<FWRuleDBModel>)fwRepo.GetAll();
         }
 
-        public List<FWRule> FWRules { get; set; }
+        public List<FWRuleDBModel> FWRules { get; set; }
         public List<Service> FWService { get; set; }
         public List<Role> FWRole { get; set; }
     }

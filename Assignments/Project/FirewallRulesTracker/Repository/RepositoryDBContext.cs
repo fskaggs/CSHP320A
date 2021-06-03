@@ -1,19 +1,19 @@
 ﻿using System;
-using FirewallRulesTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Repository.Models;
 
 #nullable disable
 
-namespace FirewallRulesTracker
+namespace Repository
 {
-    public partial class FirewallRulesContext : DbContext
+    public partial class RepositoryDBContext : DbContext
     {
-        public FirewallRulesContext()
+        public RepositoryDBContext()
         {
         }
 
-        public FirewallRulesContext(DbContextOptions<FirewallRulesContext> options)
+        public RepositoryDBContext(DbContextOptions<RepositoryDBContext> options)
             : base(options)
         {
         }
@@ -37,6 +37,6 @@ namespace FirewallRulesTracker
 
         //public DbSet<Service> Services { get; set; }
         //public DbSet<Role> Roles { get; set; }
-        public DbSet<FWRule> Rules { get; set; }
+        public DbSet<FWRuleDBModel> Rules { get; set; }
     }
 }
