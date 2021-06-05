@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirewallRulesTracker.Models
+namespace Database.Models
 {
     [Table("Services")]
-    public class Service
+    public class ServiceDB
     {
         [Column("ServiceID")]
         [Key]
@@ -21,8 +21,5 @@ namespace FirewallRulesTracker.Models
         [Required]
         [StringLength(50)]
         public string ServiceName { get; set; }
-
-        [ForeignKey("ServiceID")]
-        public List<Role> Roles { get; set; }
     }
 }

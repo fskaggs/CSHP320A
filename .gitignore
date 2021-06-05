@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Assignments/Project/FirewallRulesTracker/Database/Migrations/FWDBContextModelSnapshot.cs
+/Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605070522_AddServiceTable2.Designer.cs
+/Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605070522_AddServiceTable2.cs
+/Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605064742_AddServiceTable.Designer.cs
+/Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605064742_AddServiceTable.cs
+/Assignments/Project/FirewallRulesTracker/Database/Migrations

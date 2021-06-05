@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository
+namespace Database
 {
     public class DatabaseManager
     {
-        private static readonly RepositoryDBContext dBContext;
+        private static readonly FWDBContext dBContext;
 
         // Initialize and open the database connection
         static DatabaseManager()
         {
-            dBContext = new RepositoryDBContext();
+            dBContext = new FWDBContext();
         }
 
         // Provide an accessor to the database
-        public static RepositoryDBContext DBContext
+        public static FWDBContext DBContext
         {
             get
             {

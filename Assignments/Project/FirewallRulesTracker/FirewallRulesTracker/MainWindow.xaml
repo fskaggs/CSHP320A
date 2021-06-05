@@ -11,10 +11,15 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding FWRuleID}" Header="Rule ID" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ServiceName}" Header="Service" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding RoleName}" Header="Role" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding WorkItem}" Header="Work Item" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding SRA}" Header="SRA" Width="50" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Version}" Header="Version" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Direction}" Header="Protocol Direction" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Protocol}" Header="Protocol" Width="50" />
                     <GridViewColumn DisplayMemberBinding="{Binding Port}" Header="Port" Width="50" />
-                    <GridViewColumn DisplayMemberBinding="{Binding SRA}" Header="SRA" Width="50" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Requestor}" Header="Requestor" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>

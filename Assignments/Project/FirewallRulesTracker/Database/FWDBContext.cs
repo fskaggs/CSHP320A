@@ -1,19 +1,19 @@
 ﻿using System;
+using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Repository.Models;
 
 #nullable disable
 
-namespace Repository
+namespace Database
 {
-    public partial class RepositoryDBContext : DbContext
+    public partial class FWDBContext : DbContext
     {
-        public RepositoryDBContext()
+        public FWDBContext()
         {
         }
 
-        public RepositoryDBContext(DbContextOptions<RepositoryDBContext> options)
+        public FWDBContext(DbContextOptions<FWDBContext> options)
             : base(options)
         {
         }
@@ -35,8 +35,8 @@ namespace Repository
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        //public DbSet<Service> Services { get; set; }
-        //public DbSet<Role> Roles { get; set; }
-        public DbSet<FWRuleDBModel> Rules { get; set; }
+        public DbSet<ServiceDB> Services { get; set; }
+        public DbSet<RoleDB> Roles { get; set; }
+        public DbSet<FWRuleDB> Rules { get; set; }
     }
 }

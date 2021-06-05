@@ -17,12 +17,18 @@ namespace FirewallRulesTracker.ViewModels
         {
             fwRepo = new FWRuleRepository();
 
-            //FWService = fwDbContext.Services.ToList<Service>();
-            FWRules = (List<FWRuleDBModel>)fwRepo.GetAll();
+            FWRules = fwRepo.GetAll();
+
+            //FWRules = (from r in FWRulesDTOs
+            //           select new FWRule()
+            //           {
+            //               FWRuleID = r.FWRuleID,
+            //               Direction = (Models.DataDirection)r.Direction,
+            //               Port = r.Port,
+            //               Protocol = (Models.ProtocolType)r.Protocol
+            //           });
         }
 
-        public List<FWRuleDBModel> FWRules { get; set; }
-        public List<Service> FWService { get; set; }
-        public List<Role> FWRole { get; set; }
+        public IEnumerable<FWRuleEntity> FWRules { get; set; }
     }
 }
