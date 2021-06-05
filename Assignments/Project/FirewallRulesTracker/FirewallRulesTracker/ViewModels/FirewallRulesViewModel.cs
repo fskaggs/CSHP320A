@@ -11,7 +11,7 @@ namespace FirewallRulesTracker.ViewModels
 {
     public class FirewallRulesViewModel
     {
-        readonly FWRuleRepository fwRepo;
+        public readonly FWRuleRepository fwRepo;
 
         public FirewallRulesViewModel()
         {

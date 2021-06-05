@@ -11,13 +11,17 @@ namespace Repository
 {
     public class FWRuleRepository: IGenericDataRepository<FWRuleEntity>
     {
-        DatabaseManager db = new DatabaseManager();
-
-        public void Add(FWRuleEntity Entity)
+        public void Add(FWRuleEntity FWRule)
         {
-            throw new NotImplementedException();
-        }
+            // Convert the repository model to the database model
+            var dbRule = ToFWRuleDB(FWRule);
 
+            DatabaseManager.DBContext.Add<FWRuleDB>(dbRule);
+            DatabaseManager.DBContext.SaveChanges();
+
+            // Add a copy of the context and return it in a new FWRuleEntity object
+        }
+        
         public void Delete(FWRuleEntity Entity)
         {
             throw new NotImplementedException();
@@ -28,9 +32,23 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public FWRuleEntity Get(string Id)
+        public FWRuleEntity Get(int Id)
         {
-            throw new NotImplementedException();
+            FWRuleDB dbRule = DatabaseManager.DBContext.Rules.Where<FWRuleDB>(r => r.FWRuleID == Id).FirstOrDefault();
+
+            FWRuleEntity fwRule = new FWRuleEntity()
+            {
+                FWRuleID = dbRule.FWRuleID,
+                RoleID = dbRule.RoleID,
+                Direction = (Models.DataDirection)dbRule.Direction,
+                Port = dbRule.Port,
+                Protocol = (Models.ProtocolType)dbRule.Protocol,
+                SRA = dbRule.SRA,
+                WorkItem = dbRule.WorkItem,
+                Version = dbRule.Version,
+                RequestorID = dbRule.RequestorID
+            };
+            return fwRule;
         }
 
         public IEnumerable<FWRuleEntity> GetAll()
@@ -71,6 +89,22 @@ namespace Repository
         public void Update(FWRuleEntity dbEntity, FWRuleEntity Entity)
         {
             throw new NotImplementedException();
+        }
+
+        private FWRuleDB ToFWRuleDB(FWRuleEntity FWRule)
+        {
+            var dbRule = new FWRuleDB()
+            {
+                RoleID = FWRule.RoleID,
+                Direction = (Database.Models.DataDirection)FWRule.Direction,
+                Port = FWRule.Port,
+                Protocol = (Database.Models.ProtocolType)FWRule.Protocol,
+                SRA = FWRule.SRA,
+                WorkItem = FWRule.WorkItem,
+                Version = FWRule.Version,
+            };
+
+            return dbRule;
         }
     }
 }

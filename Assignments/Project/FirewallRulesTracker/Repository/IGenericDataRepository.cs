@@ -10,7 +10,7 @@ namespace Repository
     {
         public IEnumerable<TEntity> GetAll();
         public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression);
-        public TEntity Get(string Id);
+        public TEntity Get(int Id);
         public TEntity GetByName(string Name);
         public void Add(TEntity Entity);
         public void Update(TEntity dbEntity, TEntity Entity);

@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:FirewallRulesTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <StackPanel Orientation="Vertical">
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem x:Name="uxFileNew" Header="_New" Click="uxFileNew_Click"/>
+                <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxFileDelete_Click" Loaded="uxFileDelete_Loaded" />
+                <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxFileChange_Click" Loaded="uxFileChange_Loaded" />
+            </MenuItem>
+        </Menu>
         <ListView x:Name="uxRuleList">
             <ListView.View>
                 <GridView>
@@ -23,5 +30,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-    </Grid>
+    </StackPanel>
 </Window>
