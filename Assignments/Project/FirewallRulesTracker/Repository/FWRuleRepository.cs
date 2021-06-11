@@ -9,9 +9,9 @@ using Repository.Models;
 
 namespace Repository
 {
-    public class FWRuleRepository: IGenericDataRepository<FWRuleEntity>
+    public class FWRuleRepository
     {
-        public void Add(FWRuleEntity FWRule)
+        public FWRuleEntity Add(FWRuleEntity FWRule)
         {
             // Convert the repository model to the database model
             var dbRule = ToFWRuleDB(FWRule);
@@ -20,11 +20,17 @@ namespace Repository
             DatabaseManager.DBContext.SaveChanges();
 
             // Add a copy of the context and return it in a new FWRuleEntity object
+
+            return 
         }
         
-        public void Delete(FWRuleEntity Entity)
+        public void Delete(FWRuleEntity FWRule)
         {
-            throw new NotImplementedException();
+            // Convert the repository model to the database model
+            var dbRule = ToFWRuleDB(FWRule);
+
+            DatabaseManager.DBContext.Remove<FWRuleDB>(dbRule);
+            DatabaseManager.DBContext.SaveChanges();
         }
 
         public IQueryable<FWRuleEntity> FindByCondition(System.Linq.Expressions.Expression<Func<FWRuleEntity, bool>> expression)
@@ -36,18 +42,7 @@ namespace Repository
         {
             FWRuleDB dbRule = DatabaseManager.DBContext.Rules.Where<FWRuleDB>(r => r.FWRuleID == Id).FirstOrDefault();
 
-            FWRuleEntity fwRule = new FWRuleEntity()
-            {
-                FWRuleID = dbRule.FWRuleID,
-                RoleID = dbRule.RoleID,
-                Direction = (Models.DataDirection)dbRule.Direction,
-                Port = dbRule.Port,
-                Protocol = (Models.ProtocolType)dbRule.Protocol,
-                SRA = dbRule.SRA,
-                WorkItem = dbRule.WorkItem,
-                Version = dbRule.Version,
-                RequestorID = dbRule.RequestorID
-            };
+            FWRuleEntity fwRule = FromFWRuleDB(dbRule);
             return fwRule;
         }
 
@@ -76,16 +71,6 @@ namespace Repository
             return data;
         }
 
-        //public IEnumerable<FWRuleEntity> GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public FWRuleEntity GetByName(string Name)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(FWRuleEntity dbEntity, FWRuleEntity Entity)
         {
             throw new NotImplementedException();
@@ -105,6 +90,24 @@ namespace Repository
             };
 
             return dbRule;
+        }
+
+        private FWRuleEntity FromFWRuleDB(FWRuleDB DBRule)
+        {
+            FWRuleEntity Rule = new FWRuleEntity()
+            {
+                FWRuleID = DBRule.FWRuleID,
+                RoleID = DBRule.RoleID,
+                Direction = (Models.DataDirection)DBRule.Direction,
+                Port = DBRule.Port,
+                Protocol = (Models.ProtocolType)DBRule.Protocol,
+                SRA = DBRule.SRA,
+                WorkItem = DBRule.WorkItem,
+                Version = DBRule.Version,
+                RequestorID = DBRule.RequestorID
+            };
+
+            return Rule;
         }
     }
 }

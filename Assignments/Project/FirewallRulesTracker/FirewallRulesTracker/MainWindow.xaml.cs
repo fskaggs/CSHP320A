@@ -35,19 +35,7 @@ namespace FirewallRulesTracker
 
         private void uxFileNew_Click(object sender, RoutedEventArgs e)
         {
-            var Rule = new FWRuleEntity()
-            {
-                Direction = DataDirection.Inbound,
-                Port = 80,
-                Protocol = ProtocolType.TCP,
-                RoleID = 2,
-                SRA = "SRA06052021",
-                WorkItem = "VSO93533",
-                Version = 1
-            };
 
-            ViewModel.fwRepo.Add(Rule);
-            ViewModel.fwRepo.Get(2);
         }
 
         private void uxFileDelete_Click(object sender, RoutedEventArgs e)

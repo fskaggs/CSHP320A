@@ -1,0 +1,41 @@
+﻿<!-- CSHP320A -->
+<!-- Frederick J. Skaggs - Homework 6 -->
+
+@model Homework6.Models.CardModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Birthday Card</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-md-12">
+            <h4>Birthday Card Sent</h4>
+        </div>
+
+        <div>
+            <label class="col-md-1 col-form-label">From:</label>
+            <label class="col-form-label">@Model.FromName</label>
+        </div>
+
+        <div>
+            <label class="col-md-1 col-form-label">To:</label>
+            <label class="col-form-label">@Model.ToName</label>
+        </div>
+
+        <div>
+            <label class="col-md-1 col-form-label">Message:</label>
+            <label class="col-form-label">@Model.Message</label>
+        </div>
+    </div>
+</body>
+</html>
