@@ -354,3 +354,4 @@ MigrationBackup/
 /Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605064742_AddServiceTable.Designer.cs
 /Assignments/Project/FirewallRulesTracker/Database/Migrations/20210605064742_AddServiceTable.cs
 /Assignments/Project/FirewallRulesTracker/Database/Migrations
+/Assignments/Project/TradingCardTracker/CardDB/Migrations
