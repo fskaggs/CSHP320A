@@ -5,18 +5,8 @@ using SharedComponents;
 
 namespace TradingCardTracker.Models
 {
-    public class CardModel : ICloneable, IDataErrorInfo, INotifyPropertyChanged
+    public class CardModel : CardDTO, ICloneable, IDataErrorInfo, INotifyPropertyChanged
     {
-        public int     CardID { get; set; }
-        public string  Title { get; set; }
-        public int     CardNumber { get; set; }
-        public int     CardCount { get; set; }
-        public decimal Value { get; set; }
-        public string  ReleaseYear { get; set; }
-        public string  Notes { get; set; }
-        public Condition CardCondition { get; set; }
-        public CardType TypeOfCard { get; set; }
-
         public string Error => throw new NotImplementedException();
 
         public event PropertyChangedEventHandler PropertyChanged;
