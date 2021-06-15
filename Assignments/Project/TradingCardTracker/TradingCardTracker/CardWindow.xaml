@@ -47,7 +47,7 @@
         </Style>
         
         <Style TargetType="TextBlock" x:Key="InputError">
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Red"/>
@@ -71,6 +71,10 @@
                     <TextBlock x:Name="uxTitleError" Text="{Binding TitleError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
                 </StackPanel>        
                 <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Card Franchise:</TextBlock>
+                    <TextBox x:Name="uxFranchise" Width="350" Text="{Binding CardFranchise}" Style="{StaticResource StandardInput}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Number:</TextBlock>
                     <TextBox x:Name="uxCardNumber" Text="{Binding CardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource StandardInput}" />
                     <TextBlock x:Name="uxCardNumberError" Text="{Binding CardNumberError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
@@ -84,20 +88,22 @@
                     <TextBox x:Name="uxCardCount" Text="{Binding CardCount}" Style="{StaticResource StandardInput}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource LabelText}">Value:</TextBlock>
+                    <TextBlock Style="{StaticResource LabelText}">Dollar Value:</TextBlock>
                     <TextBox x:Name="uxValue" Text="{Binding Value}" Style="{StaticResource StandardInput}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Condition:</TextBlock>
                     <ComboBox x:Name="uxCondition" IsEditable="False" Text="Card Condition" 
-                              SelectedItem="{Binding Path=CardCondition, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding Path=CardCondition, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                               Style="{StaticResource ComboInput}" />
+                    <TextBlock x:Name="uxCardConditionError" Text="{Binding ConditionError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Type:</TextBlock>
                     <ComboBox x:Name="uxCardType" IsEditable="False" Text="Card Type" 
-                              SelectedItem="{Binding Path=TypeOfCard, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding Path=TypeOfCard, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                               Style="{StaticResource ComboInput}" />
+                    <TextBlock x:Name="uxTypeOfCardError" Text="{Binding TypeOfCardError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Notes:</TextBlock>

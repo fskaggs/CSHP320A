@@ -49,6 +49,34 @@ namespace TradingCardTracker.Models
             }
         }
 
+        string conditionError;
+        public string ConditionError
+        {
+            get { return conditionError; }
+            set
+            {
+                if (conditionError != value)
+                {
+                    conditionError = value;
+                    InvokePropertyChanged("ConditionError");
+                }
+            }
+        }
+
+        string typeOfCardError;
+        public string TypeOfCardError
+        {
+            get { return typeOfCardError; }
+            set
+            {
+                if (typeOfCardError != value)
+                {
+                    typeOfCardError = value;
+                    InvokePropertyChanged("TypeOfCardError");
+                }
+            }
+        }
+
         public string this[string columnName]
         {
             get
@@ -66,6 +94,18 @@ namespace TradingCardTracker.Models
                             CardNumberError = string.Empty;
                             if (CardNumber <= 0) { CardNumberError = "Card number must be greater than 0"; }
                             return CardNumberError;
+                        }
+                    case "CardCondition":
+                        {
+                            ConditionError = string.Empty;
+                            if (CardCondition == Condition.Unknown) { ConditionError = "Condition of the card required"; }
+                            return ConditionError;
+                        }
+                    case "TypeOfCard":
+                        {
+                            TypeOfCardError = string.Empty;
+                            if (TypeOfCard == CardType.Unknown) { TypeOfCardError = "Type of card selection required"; }
+                            return TypeOfCardError;
                         }
                 }
 
@@ -85,23 +125,25 @@ namespace TradingCardTracker.Models
                 Value = Card.Value,
                 ReleaseYear = Card.ReleaseYear,
                 CardCondition = Card.CardCondition,
-                TypeOfCard = Card.TypeOfCard
+                TypeOfCard = Card.TypeOfCard,
+                CardFranchise = Card.CardFranchise
             };
         }
 
         public static CardModel ToModel(CardRepoModel Card)
         {
             return new CardModel()
-                        {
-                            CardID = Card.CardID,
-                            Title = Card.Title,
-                            CardNumber = Card.CardNumber,
-                            CardCount = Card.CardCount,
-                            Notes = Card.Notes,
-                            Value = Card.Value,
-                            ReleaseYear = Card.ReleaseYear,
-                            CardCondition = Card.CardCondition,
-                            TypeOfCard = Card.TypeOfCard
+            {
+                CardID = Card.CardID,
+                Title = Card.Title,
+                CardNumber = Card.CardNumber,
+                CardCount = Card.CardCount,
+                Notes = Card.Notes,
+                Value = Card.Value,
+                ReleaseYear = Card.ReleaseYear,
+                CardCondition = Card.CardCondition,
+                TypeOfCard = Card.TypeOfCard,
+                CardFranchise = Card.CardFranchise
             };
         }
 
@@ -117,7 +159,8 @@ namespace TradingCardTracker.Models
                 Value = this.Value,
                 ReleaseYear = this.ReleaseYear,
                 CardCondition = this.CardCondition,
-                TypeOfCard = this.TypeOfCard
+                TypeOfCard = this.TypeOfCard,
+                CardFranchise = this.CardFranchise
             };
             return clone;
         }

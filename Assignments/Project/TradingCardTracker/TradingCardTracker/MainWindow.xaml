@@ -16,8 +16,8 @@
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="Margin" Value="20,3,10,0" />
-            <Setter Property="MinWidth" Value="175"/>
+            <Setter Property="Margin" Value="20,3,5,0" />
+            <Setter Property="MinWidth" Value="125"/>
         </Style>
 
         <Style TargetType="TextBlock" x:Key="DetailText">
@@ -25,7 +25,18 @@
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="Margin" Value="20,3,10,0" />
-            <Setter Property="MinWidth" Value="175"/>
+            <Setter Property="MinWidth" Value="300"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="DetailNotes">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="50,3,10,0"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="370"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </Window.Resources>
     
@@ -77,10 +88,10 @@
                 </DataTemplate>
             </ListView.Resources>
             <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="175">
+                <GridView x:Name="uxGridView">
+                    <GridViewColumn x:Name="uxGvTitle" DisplayMemberBinding="{Binding Title}" Width="175">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Title</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Card Title</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="90" CellTemplate="{StaticResource ResourceKey=CellCardType}" >
@@ -113,24 +124,41 @@
                             <GridViewColumnHeader Tag="Value" Click="uxCardsColumnHeader_Click">Value($)</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <!--<GridViewColumn Width="300" CellTemplate="{StaticResource ResourceKey=CellNotes}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Notes</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
         <StackPanel Orientation="Horizontal">
-            <GroupBox x:Name="uxDetails" Header="Card Details" Height="180" Width="470" Margin="0,0,5,0">
-                <StackPanel>
+            <GroupBox x:Name="uxDetails" Header="Card Details" Height="230" Width="470" Margin="0,0,5,0">
+                <StackPanel x:Name="uxDetailsPanel" Margin="0,10,0,5" Visibility="Hidden">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource DetailLabelText}">Card Title:</TextBlock>
-                        <TextBlock x:Name="uxTitle" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="350" Style="{StaticResource DetailText}" />
+                        <TextBlock x:Name="uxDetailTitle" Style="{StaticResource DetailText}" />
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Card Type:</TextBlock>
+                        <TextBlock x:Name="uxDetailType" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Card Franchise:</TextBlock>
+                        <TextBlock x:Name="uxDetailFranchise" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Number of Cards:</TextBlock>
+                        <TextBlock x:Name="uxDetailCardCount" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Release Year:</TextBlock>
+                        <TextBlock x:Name="uxDetailReleaseYear" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Dollar Value:</TextBlock>
+                        <TextBlock x:Name="uxDetailValue" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource DetailLabelText}">Notes:</TextBlock>
+                    <TextBlock x:Name="uxDetailNotes" Style="{StaticResource ResourceKey=DetailNotes}"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox x:Name="uxCarPicture" Header="Card Picture" Height="180" Width="300">
+            <GroupBox x:Name="uxCarPicture" Header="Card Picture" Height="230" Width="300">
                 <Image x:Name="uxCardImage" Source="" />
             </GroupBox>
         </StackPanel>

@@ -11,5 +11,6 @@
         public string Notes { get; set; }
         public Condition CardCondition { get; set; }
         public CardType TypeOfCard { get; set; }
+        public string CardFranchise { get; set; }
     }
 }

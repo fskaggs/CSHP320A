@@ -41,7 +41,8 @@ namespace Repository
                   Value = t.Value,
                   ReleaseYear = t.ReleaseYear,
                   CardCondition = t.CardCondition,
-                  TypeOfCard = t.TypeOfCard
+                  TypeOfCard = t.TypeOfCard,
+                  CardFranchise = t.CardFranchise
               }).ToList();
 
             return items;
@@ -77,19 +78,20 @@ namespace Repository
             return true;
         }
 
-        private CardDBModel ToDbModel(CardRepoModel CardModel)
+        private CardDBModel ToDbModel(CardRepoModel Card)
         {
             var cardDb = new CardDBModel
             {
-                CardID = CardModel.CardID,
-                Title = CardModel.Title,
-                CardNumber = CardModel.CardNumber,
-                CardCount = CardModel.CardCount,
-                Notes = CardModel.Notes,
-                Value = CardModel.Value,
-                ReleaseYear = CardModel.ReleaseYear,
-                TypeOfCard = CardModel.TypeOfCard,
-                CardCondition = CardModel.CardCondition
+                CardID = Card.CardID,
+                Title = Card.Title,
+                CardNumber = Card.CardNumber,
+                CardCount = Card.CardCount,
+                Notes = Card.Notes,
+                Value = Card.Value,
+                ReleaseYear = Card.ReleaseYear,
+                TypeOfCard = Card.TypeOfCard,
+                CardCondition = Card.CardCondition,
+                CardFranchise = Card.CardFranchise
             };
 
             return cardDb;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -135,6 +136,21 @@ namespace TradingCardTracker
         private void uxCardList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedCard = (CardModel)uxCardList.SelectedValue;
+            if (selectedCard != null)
+            {
+                uxDetailTitle.Text = selectedCard.Title;
+                uxDetailType.Text = Enum.GetName(selectedCard.TypeOfCard);
+                uxDetailFranchise.Text = selectedCard.CardFranchise;
+                uxDetailCardCount.Text = selectedCard.CardCount.ToString();
+                uxDetailReleaseYear.Text = selectedCard.ReleaseYear;
+                uxDetailValue.Text = selectedCard.Value.ToString();
+                uxDetailNotes.Text = selectedCard.Notes;
+                uxDetailsPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                uxDetailsPanel.Visibility = Visibility.Hidden;
+            }
         }
 
         private void uxFileDelete_Click(object sender, RoutedEventArgs e)
