@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingCardTracker"
         mc:Ignorable="d"
-        Title="Trading Card Tracker" Height="450" Width="800">
+        Title="Trading Card Tracker" Height="465" Width="800">
 
     <Window.Resources>
         <Style TargetType="ListViewItem">
@@ -39,140 +39,144 @@
             <Setter Property="Width" Value="370"/>
         </Style>
     </Window.Resources>
-    
-    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
-        <Menu>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem x:Name="uxFileNew"    Header="_New"    Click="uxFileNew_Click" />
                 <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxFileDelete_Click" Loaded="uxFileDelete_Loaded" />
                 <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxFileChange_Click" Loaded="uxFileChange_Loaded" />
             </MenuItem>
         </Menu>
-        <ListView x:Name="uxCardList" Height="150" SelectionChanged="uxCardList_SelectionChanged" MouseDoubleClick="uxFileChange_Click">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="uxContextFileNew"    Header="_New" Click="uxFileNew_Click"/>
-                    <MenuItem x:Name="uxContextFileChange" Header="_Modify" Click="uxFileChange_Click"  Loaded="uxFileChange_Loaded"/>
-                    <MenuItem x:Name="uxContextFileDelete" Header="_Delete" Click="uxFileDelete_Click"  Loaded="uxFileDelete_Loaded" />
-                </ContextMenu>
-            </ListView.ContextMenu>
-            <ListView.Resources>
-                <DataTemplate x:Key="CellCardTitle">
-                    <TextBlock HorizontalAlignment="Left" Text="{Binding CardTitle}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellCardFranchise">
-                    <TextBlock HorizontalAlignment="Left" Text="{Binding CardFranchise}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellCardType">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding TypeOfCard}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellCardNumber">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding CardNumber}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellCardCount">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding CardCount}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellValue">
-                    <TextBlock HorizontalAlignment="Right" Text="{Binding Value}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellReleaseYear">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding ReleaseYear}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellCardCondition">
-                    <TextBlock HorizontalAlignment="Left" Text="{Binding CardCondition}"/>
-                </DataTemplate>
-                <DataTemplate x:Key="CellNotes">
-                    <TextBlock HorizontalAlignment="Left" Text="{Binding Notes}"/>
-                </DataTemplate>
-            </ListView.Resources>
-            <ListView.View>
-                <GridView x:Name="uxGridView">
-                    <GridViewColumn CellTemplate="{StaticResource ResourceKey=CellCardNumber}" Width="60">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="CardNumber" Click="uxCardsColumnHeader_Click" Width="60">Card</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="uxGvTitle" DisplayMemberBinding="{Binding Title}" Width="175">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Card Title</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="90" CellTemplate="{StaticResource ResourceKey=CellCardType}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="CardType" Click="uxCardsColumnHeader_Click">Card Type</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="uxGvFranchise" DisplayMemberBinding="{Binding CardFranchise}" Width="175">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Card Franchise</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>                    
-                    <!-- Saved for future use but this is information provided in the detail pane.
-                    <GridViewColumn Width="100"  CellTemplate="{StaticResource ResourceKey=CellReleaseYear}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="ReleaseYear" Click="uxCardsColumnHeader_Click">Release Year</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="95"  CellTemplate="{StaticResource ResourceKey=CellCardCount}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="CardCount" Click="uxCardsColumnHeader_Click">Card Count</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellCardCondition}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="CardCondition" Click="uxCardsColumnHeader_Click">Condition</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellValue}" >
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Value" Click="uxCardsColumnHeader_Click">Value($)</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    -->
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <StackPanel Orientation="Horizontal">
-            <GroupBox x:Name="uxDetails" Header="Card Details" Height="230" Width="470" Margin="0,0,5,0">
-                <StackPanel x:Name="uxDetailsPanel" Margin="0,5,0,5" Visibility="Hidden">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Card Title:</TextBlock>
-                        <TextBlock x:Name="uxDetailTitle" Style="{StaticResource DetailText}" />
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="5,5,5,5">
+            <ListView x:Name="uxCardList" Height="150" SelectionChanged="uxCardList_SelectionChanged" MouseDoubleClick="uxFileChange_Click">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="uxContextFileNew"    Header="_New" Click="uxFileNew_Click"/>
+                        <MenuItem x:Name="uxContextFileChange" Header="_Modify" Click="uxFileChange_Click"  Loaded="uxFileChange_Loaded"/>
+                        <MenuItem x:Name="uxContextFileDelete" Header="_Delete" Click="uxFileDelete_Click"  Loaded="uxFileDelete_Loaded" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.Resources>
+                    <DataTemplate x:Key="CellCardTitle">
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding CardTitle}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellCardFranchise">
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding CardFranchise}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellCardType">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding TypeOfCard}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellCardNumber">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding CardNumber}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellCardCount">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding CardCount}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellValue">
+                        <TextBlock HorizontalAlignment="Right" Text="{Binding Value}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellReleaseYear">
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding ReleaseYear}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellCardCondition">
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding CardCondition}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="CellNotes">
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding Notes}"/>
+                    </DataTemplate>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView x:Name="uxGridView">
+                        <GridViewColumn CellTemplate="{StaticResource ResourceKey=CellCardNumber}" Width="60">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="CardNumber" Click="uxCardsColumnHeader_Click" Width="60">Card</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="uxGvTitle" DisplayMemberBinding="{Binding Title}" Width="175">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Card Title</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="90" CellTemplate="{StaticResource ResourceKey=CellCardType}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="CardType" Click="uxCardsColumnHeader_Click">Card Type</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="uxGvFranchise" DisplayMemberBinding="{Binding CardFranchise}" Width="175">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Card Franchise</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>                    
+                        <!-- Saved for future use but this is information provided in the detail pane.
+                        <GridViewColumn Width="100"  CellTemplate="{StaticResource ResourceKey=CellReleaseYear}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="ReleaseYear" Click="uxCardsColumnHeader_Click">Release Year</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="95"  CellTemplate="{StaticResource ResourceKey=CellCardCount}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="CardCount" Click="uxCardsColumnHeader_Click">Card Count</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellCardCondition}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="CardCondition" Click="uxCardsColumnHeader_Click">Condition</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellValue}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Value" Click="uxCardsColumnHeader_Click">Value($)</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        -->
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal">
+                <GroupBox x:Name="uxDetails" Header="Card Details" Height="230" Width="470" Margin="0,0,5,0">
+                    <StackPanel x:Name="uxDetailsPanel" Margin="0,5,0,5" Visibility="Hidden">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Card Title:</TextBlock>
+                            <TextBlock x:Name="uxDetailTitle" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Card Type:</TextBlock>
+                            <TextBlock x:Name="uxDetailType" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Card Franchise:</TextBlock>
+                            <TextBlock x:Name="uxDetailFranchise" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Number of Cards:</TextBlock>
+                            <TextBlock x:Name="uxDetailCardCount" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Release Year:</TextBlock>
+                            <TextBlock x:Name="uxDetailReleaseYear" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource DetailLabelText}">Dollar Value:</TextBlock>
+                            <TextBlock x:Name="uxDetailValue" Style="{StaticResource DetailText}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <TextBlock Style="{StaticResource DetailLabelText}" MinWidth="50">Notes:</TextBlock>
+                            <TextBlock x:Name="uxDetailNotes" Style="{StaticResource ResourceKey=DetailNotes}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Card Type:</TextBlock>
-                        <TextBlock x:Name="uxDetailType" Style="{StaticResource DetailText}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Card Franchise:</TextBlock>
-                        <TextBlock x:Name="uxDetailFranchise" Style="{StaticResource DetailText}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Number of Cards:</TextBlock>
-                        <TextBlock x:Name="uxDetailCardCount" Style="{StaticResource DetailText}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Release Year:</TextBlock>
-                        <TextBlock x:Name="uxDetailReleaseYear" Style="{StaticResource DetailText}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource DetailLabelText}">Dollar Value:</TextBlock>
-                        <TextBlock x:Name="uxDetailValue" Style="{StaticResource DetailText}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10">
-                        <TextBlock Style="{StaticResource DetailLabelText}" MinWidth="50">Notes:</TextBlock>
-                        <TextBlock x:Name="uxDetailNotes" Style="{StaticResource ResourceKey=DetailNotes}"/>
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox x:Name="uxCardPicture" Header="Card Picture" Height="230" Width="300">
-                <Image x:Name="uxCardImage" Visibility="Hidden" />
-            </GroupBox>
+                </GroupBox>
+                <GroupBox x:Name="uxCardPicture" Header="Card Picture" Height="230" Width="300">
+                    <Image x:Name="uxCardImage" Visibility="Hidden" />
+                </GroupBox>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom" Name="uxStatusBar"/>
+    </DockPanel>
 </Window>

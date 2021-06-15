@@ -5,6 +5,8 @@
         Unknown,
         Movie,
         Baseball,
-        Game
+        Game,
+        Trading,
+        Other
     }
 }
