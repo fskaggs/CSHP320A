@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using TradingCardTracker.Models;
 
 namespace TradingCardTracker
@@ -146,10 +147,18 @@ namespace TradingCardTracker
                 uxDetailValue.Text = selectedCard.Value.ToString();
                 uxDetailNotes.Text = selectedCard.Notes;
                 uxDetailsPanel.Visibility = Visibility.Visible;
+                uxCardImage.Visibility = Visibility.Visible;
+
+                // Convert the image from a byte array back to a displayable image type
+                if (selectedCard.Image != null)
+                    uxCardImage.Source = (BitmapSource)new ImageSourceConverter().ConvertFrom(selectedCard.Image);
+                else
+                    uxCardImage.Source = null;
             }
             else
             {
                 uxDetailsPanel.Visibility = Visibility.Hidden;
+                uxCardImage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -164,6 +173,19 @@ namespace TradingCardTracker
         {
             uxFileDelete.IsEnabled = (selectedCard != null);
             uxContextFileDelete.IsEnabled = (selectedCard != null);
+        }
+
+        private BitmapSource ByteArrayToBitmapSource(byte[] image)
+        {
+            using (var stream = new System.IO.MemoryStream(image))
+            {
+                var encoder = new JpegBitmapEncoder();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.EndInit();
+                return bitmap;
+            }
         }
     }
 }

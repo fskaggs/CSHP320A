@@ -126,7 +126,8 @@ namespace TradingCardTracker.Models
                 ReleaseYear = Card.ReleaseYear,
                 CardCondition = Card.CardCondition,
                 TypeOfCard = Card.TypeOfCard,
-                CardFranchise = Card.CardFranchise
+                CardFranchise = Card.CardFranchise,
+                Image = Card.Image
             };
         }
 
@@ -143,7 +144,8 @@ namespace TradingCardTracker.Models
                 ReleaseYear = Card.ReleaseYear,
                 CardCondition = Card.CardCondition,
                 TypeOfCard = Card.TypeOfCard,
-                CardFranchise = Card.CardFranchise
+                CardFranchise = Card.CardFranchise,
+                Image = Card.Image
             };
         }
 
@@ -160,7 +162,8 @@ namespace TradingCardTracker.Models
                 ReleaseYear = this.ReleaseYear,
                 CardCondition = this.CardCondition,
                 TypeOfCard = this.TypeOfCard,
-                CardFranchise = this.CardFranchise
+                CardFranchise = this.CardFranchise,
+                Image = this.Image
             };
             return clone;
         }

@@ -112,6 +112,7 @@
             </StackPanel>
         </GroupBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="uxUpload" Style="{StaticResource ResourceKey=StandardButton}" Click="uxUpload_Click">Upload Image</Button>
                 <Button x:Name="uxSubmit" Style="{StaticResource ResourceKey=StandardButton}" Click="uxSubmit_Click">Save</Button>
                 <Button x:Name="uxCancel" Style="{StaticResource ResourceKey=StandardButton}" Click="uxCancel_Click">Cancel</Button>
             </StackPanel>

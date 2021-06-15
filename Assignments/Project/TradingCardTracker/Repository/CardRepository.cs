@@ -42,7 +42,8 @@ namespace Repository
                   ReleaseYear = t.ReleaseYear,
                   CardCondition = t.CardCondition,
                   TypeOfCard = t.TypeOfCard,
-                  CardFranchise = t.CardFranchise
+                  CardFranchise = t.CardFranchise,
+                  Image = t.Image
               }).ToList();
 
             return items;
@@ -91,7 +92,8 @@ namespace Repository
                 ReleaseYear = Card.ReleaseYear,
                 TypeOfCard = Card.TypeOfCard,
                 CardCondition = Card.CardCondition,
-                CardFranchise = Card.CardFranchise
+                CardFranchise = Card.CardFranchise,
+                Image = Card.Image
             };
 
             return cardDb;

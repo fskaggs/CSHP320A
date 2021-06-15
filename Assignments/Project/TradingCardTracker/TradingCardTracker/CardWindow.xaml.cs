@@ -1,4 +1,5 @@
-﻿using SharedComponents;
+﻿using Microsoft.Win32;
+using SharedComponents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,33 @@ namespace TradingCardTracker
             }
 
             uxGrid.DataContext = Card;
+        }
+
+        private void uxUpload_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            openFileDialog.Filter = "JPEG Files (*.jpg)|*.jpg;*.jpeg";
+            openFileDialog.DefaultExt = ".jpg";
+            string fileName = openFileDialog.FileName;
+
+            if (fileName != string.Empty)
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(fileName));
+                byte[] image = BitmapSourceToByteArray(bitmap);
+                Card.Image = image;
+            }
+        }
+
+        private byte[] BitmapSourceToByteArray(BitmapSource image)
+        {
+            using (var stream = new System.IO.MemoryStream())
+            {
+                var encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(image));
+                encoder.Save(stream);
+                return stream.ToArray();
+            }
         }
     }
 }
