@@ -26,9 +26,9 @@ namespace TradingCardTracker
 
         private void LoadCards()
         {
-            var contacts = App.CardRepository.GetAll();
+            var cards = App.CardRepository.GetAll();
 
-            uxCardList.ItemsSource = contacts
+            uxCardList.ItemsSource = cards
                 .Select(t => CardModel.ToModel(t))
                 .ToList();
         }

@@ -6,8 +6,30 @@
         xmlns:local="clr-namespace:TradingCardTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="DetailLabelText">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="20,3,10,0" />
+            <Setter Property="MinWidth" Value="175"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="DetailText">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="20,3,10,0" />
+            <Setter Property="MinWidth" Value="175"/>
+        </Style>
+    </Window.Resources>
     
-    <StackPanel Orientation="Vertical">
+    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem x:Name="uxFileNew"    Header="_New"    Click="uxFileNew_Click" />
@@ -15,7 +37,12 @@
                 <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxFileChange_Click" Loaded="uxFileChange_Loaded" />
             </MenuItem>
         </Menu>
-        <ListView x:Name="uxCardList" Height="200" SelectionChanged="uxCardList_SelectionChanged" MouseDoubleClick="uxFileChange_Click">
+        <ListView x:Name="uxCardList" Height="150" SelectionChanged="uxCardList_SelectionChanged" MouseDoubleClick="uxFileChange_Click">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="uxContextFileNew"    Header="_New" Click="uxFileNew_Click"/>
@@ -23,20 +50,89 @@
                     <MenuItem x:Name="uxContextFileDelete" Header="_Delete" Click="uxFileDelete_Click"  Loaded="uxFileDelete_Loaded" />
                 </ContextMenu>
             </ListView.ContextMenu>
+            <ListView.Resources>
+                <DataTemplate x:Key="CellCardTitle">
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding CardTitle}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellCardType">
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding TypeOfCard}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellCardNumber">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding CardNumber}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellCardCount">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding CardCount}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellValue">
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding Value}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellReleaseYear">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding ReleaseYear}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellCardCondition">
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding CardCondition}"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CellNotes">
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Notes}"/>
+                </DataTemplate>
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="175" >
+                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="175">
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Title</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding CardNumber}" Header="Card Number" Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding CardCount}" Header="Card Count" Width="75" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value" Width="50" />
-                    <GridViewColumn DisplayMemberBinding="{Binding ReleaseYear}" Header="Release Year" Width="75" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Notes}" Header="Notes" Width="300"/>
+                    <GridViewColumn Width="90" CellTemplate="{StaticResource ResourceKey=CellCardType}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="CardType" Click="uxCardsColumnHeader_Click">Card Type</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100"  CellTemplate="{StaticResource ResourceKey=CellReleaseYear}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ReleaseYear" Click="uxCardsColumnHeader_Click">Release Year</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="110" CellTemplate="{StaticResource ResourceKey=CellCardNumber}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="CardNumber" Click="uxCardsColumnHeader_Click">Card Number</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="95"  CellTemplate="{StaticResource ResourceKey=CellCardCount}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="CardCount" Click="uxCardsColumnHeader_Click">Card Count</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellCardCondition}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="CardCondition" Click="uxCardsColumnHeader_Click">Condition</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="90"  CellTemplate="{StaticResource ResourceKey=CellValue}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Value" Click="uxCardsColumnHeader_Click">Value($)</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <!--<GridViewColumn Width="300" CellTemplate="{StaticResource ResourceKey=CellNotes}" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Title" Click="uxCardsColumnHeader_Click">Notes</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox x:Name="uxDetails" Header="Card Details" Height="180" Width="470" Margin="0,0,5,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource DetailLabelText}">Card Title:</TextBlock>
+                        <TextBlock x:Name="uxTitle" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="350" Style="{StaticResource DetailText}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="uxCarPicture" Header="Card Picture" Height="180" Width="300">
+                <Image x:Name="uxCardImage" Source="" />
+            </GroupBox>
+        </StackPanel>
     </StackPanel>
 </Window>

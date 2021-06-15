@@ -39,7 +39,9 @@ namespace Repository
                   CardCount = t.CardCount,
                   Notes = t.Notes,
                   Value = t.Value,
-                  ReleaseYear = t.ReleaseYear
+                  ReleaseYear = t.ReleaseYear,
+                  CardCondition = t.CardCondition,
+                  TypeOfCard = t.TypeOfCard
               }).ToList();
 
             return items;
@@ -85,7 +87,9 @@ namespace Repository
                 CardCount = CardModel.CardCount,
                 Notes = CardModel.Notes,
                 Value = CardModel.Value,
-                ReleaseYear = CardModel.ReleaseYear
+                ReleaseYear = CardModel.ReleaseYear,
+                TypeOfCard = CardModel.TypeOfCard,
+                CardCondition = CardModel.CardCondition
             };
 
             return cardDb;

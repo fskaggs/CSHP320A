@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingCardTracker"
         mc:Ignorable="d"
-        Title="CardWindow" Height="450" Width="800"
+        Title="Trading Card Details" Height="450" Width="800"
         FocusManager.FocusedElement="{Binding ElementName=uxTitle}"
         Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="LabelText">
-            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="Margin" Value="20,3,10,0" />
-            <Setter Property="MinWidth" Value="155"/>
+            <Setter Property="MinWidth" Value="130"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="Input">
-            <Setter Property="FontSize" Value="22"/>
+        <Style TargetType="TextBox" x:Key="StandardInput">
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="BlanchedAlmond"/>
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontWeight" Value="Normal"/>
@@ -27,8 +27,18 @@
             <Setter Property="MinWidth" Value="75"/>
         </Style>
 
+        <Style TargetType="TextBox" x:Key="NotesInput">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="BlanchedAlmond"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="0,3,10,0"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="400"/>
+        </Style>
+        
         <Style TargetType="ComboBox" x:Key="ComboInput">
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="BlanchedAlmond"/>
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontWeight" Value="Normal"/>
@@ -37,48 +47,67 @@
         </Style>
         
         <Style TargetType="TextBlock" x:Key="InputError">
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Red"/>
             <Setter Property="Margin" Value="0,3,10,0"/>
         </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="StandardButton">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,10"/>
+        </Style>
     </Window.Resources>
     
-    <StackPanel x:Name="uxGrid">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Card Title:</TextBlock>
-            <TextBox x:Name="uxTitle" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="250" Style="{StaticResource Input}" />
-            <TextBlock x:Name="uxTitleError" Text="{Binding TitleError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
-        </StackPanel>        
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Card Number:</TextBlock>
-            <TextBox x:Name="uxCardNumber" Text="{Binding CardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource Input}" />
-            <TextBlock x:Name="uxCardNumberError" Text="{Binding CardNumberError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Card Count:</TextBlock>
-            <TextBox x:Name="uxCardCount" Text="{Binding CardCount}" Style="{StaticResource Input}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Value:</TextBlock>
-            <TextBox x:Name="uxValue" Text="{Binding Value}" Style="{StaticResource Input}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}" >Release Year:</TextBlock>
-            <TextBox x:Name="uxReleaseYear" Text="{Binding ReleaseYear}" Style="{StaticResource Input}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Card Condition:</TextBlock>
-            <ComboBox x:Name="uxCondition" IsEditable="False" Text="Card Condition" SelectedItem="{Binding Path=Condition}" Style="{StaticResource ComboInput}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource LabelText}">Notes:</TextBlock>
-            <TextBox x:Name="uxNotes" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Notes}" Style="{StaticResource Input}" Width="400"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="uxSubmit" Width="50" HorizontalAlignment="Center" Click="uxSubmit_Click" Margin="10,20">Save</Button>
-            <Button x:Name="uxCancel" Width="50" HorizontalAlignment="Center" Click="uxCancel_Click" Margin="10,20">Cancel</Button>
-        </StackPanel>
+    <StackPanel x:Name="uxGrid" Margin="10">
+        <TextBlock x:Name="uxCardWindowAction" Margin="5,0,5,5" FontSize="18" FontFamily="Arial" HorizontalAlignment="Center"/>
+        <GroupBox Header="Card Details" >
+            <StackPanel Margin="10,0,10,5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Card Title:</TextBlock>
+                    <TextBox x:Name="uxTitle" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="350" Style="{StaticResource StandardInput}" />
+                    <TextBlock x:Name="uxTitleError" Text="{Binding TitleError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
+                </StackPanel>        
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Card Number:</TextBlock>
+                    <TextBox x:Name="uxCardNumber" Text="{Binding CardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource StandardInput}" />
+                    <TextBlock x:Name="uxCardNumberError" Text="{Binding CardNumberError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}" >Release Year:</TextBlock>
+                    <TextBox x:Name="uxReleaseYear" Text="{Binding ReleaseYear}" Style="{StaticResource StandardInput}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Number of Cards:</TextBlock>
+                    <TextBox x:Name="uxCardCount" Text="{Binding CardCount}" Style="{StaticResource StandardInput}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Value:</TextBlock>
+                    <TextBox x:Name="uxValue" Text="{Binding Value}" Style="{StaticResource StandardInput}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Card Condition:</TextBlock>
+                    <ComboBox x:Name="uxCondition" IsEditable="False" Text="Card Condition" 
+                              SelectedItem="{Binding Path=CardCondition, UpdateSourceTrigger=PropertyChanged}" 
+                              Style="{StaticResource ComboInput}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Card Type:</TextBlock>
+                    <ComboBox x:Name="uxCardType" IsEditable="False" Text="Card Type" 
+                              SelectedItem="{Binding Path=TypeOfCard, UpdateSourceTrigger=PropertyChanged}" 
+                              Style="{StaticResource ComboInput}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource LabelText}">Notes:</TextBlock>
+                    <TextBox x:Name="uxNotes" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Notes}" Style="{StaticResource NotesInput}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="uxSubmit" Style="{StaticResource ResourceKey=StandardButton}" Click="uxSubmit_Click">Save</Button>
+                <Button x:Name="uxCancel" Style="{StaticResource ResourceKey=StandardButton}" Click="uxCancel_Click">Cancel</Button>
+            </StackPanel>
     </StackPanel>
 </Window>

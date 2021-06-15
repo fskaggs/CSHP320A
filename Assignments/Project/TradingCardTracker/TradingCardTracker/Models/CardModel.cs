@@ -25,12 +25,26 @@ namespace TradingCardTracker.Models
         public string TitleError 
         {
             get { return titleError; } 
-            set
+            set 
             {
                 if (titleError != value)
                 {
                     titleError = value;
                     InvokePropertyChanged("TitleError");
+                }
+            }
+        }
+
+        string cardNumberError;
+        public string CardNumberError
+        {
+            get { return cardNumberError; }
+            set
+            {
+                if (cardNumberError != value)
+                {
+                    cardNumberError = value;
+                    InvokePropertyChanged("CardNumberError");
                 }
             }
         }
@@ -46,6 +60,12 @@ namespace TradingCardTracker.Models
                             TitleError = string.Empty;
                             if (Title == null || string.IsNullOrEmpty(Title)) { TitleError = "Title cannot be empty"; }
                             return TitleError;
+                        }
+                    case "CardNumber":
+                        {
+                            CardNumberError = string.Empty;
+                            if (CardNumber <= 0) { CardNumberError = "Card number must be greater than 0"; }
+                            return CardNumberError;
                         }
                 }
 

@@ -2,6 +2,7 @@
 {
     public enum Condition
     {
+        Unknown,
         Poor,
         Fair,
         Good,
