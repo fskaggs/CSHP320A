@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -10,6 +11,14 @@ using TradingCardTracker.Models;
 
 namespace TradingCardTracker
 {
+    public enum SearchBy
+    {
+        None,
+        CardNumber,
+        CardTitle,
+        CardFranchise
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -18,6 +27,8 @@ namespace TradingCardTracker
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
         private CardModel selectedCard;
+        private SearchBy SearchFilterType { get; set; }
+        private string ValueToFind { get; set; }
 
         public MainWindow()
         {
@@ -33,6 +44,17 @@ namespace TradingCardTracker
             uxCardList.ItemsSource = cards
                 .Select(t => CardModel.ToModel(t))
                 .ToList();
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(uxCardList.ItemsSource);
+            switch (SearchFilterType)
+            {
+                case SearchBy.CardNumber: { view.Filter = CardNumberFilter; break; }
+                case SearchBy.CardTitle: { view.Filter = CardTitleFilter; break; }
+                case SearchBy.CardFranchise: { view.Filter = CardFranchiseFilter; break; }
+                default: { view.Filter = null; break; }
+            }
+
+            uxCardsLoaded.Text = $"Number of Cards Available: {uxCardList.Items.Count}";
         }
 
         private void uxFileNew_Click(object sender, RoutedEventArgs e)
@@ -186,6 +208,83 @@ namespace TradingCardTracker
                 bitmap.EndInit();
                 return bitmap;
             }
+        }
+
+        private void uxFileExit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void uxCardList_Loaded(object sender, RoutedEventArgs e)
+        {
+            uxCardsLoaded.Text = $"Number of Cards Available: {uxCardList.Items.Count}";
+        }
+
+        private void uxSearchByCardTitle_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SearchByCardNumber(SearchBy.CardTitle);
+            SearchFilterType = SearchBy.CardTitle;
+
+            if (window.ShowDialog() == true)
+            {
+                ValueToFind = window.uxValueToFind.Text;
+                LoadCards();
+            }
+        }
+
+        private void uxSearchByCardNumber_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SearchByCardNumber(SearchBy.CardNumber);
+            SearchFilterType = SearchBy.CardNumber;
+
+            if (window.ShowDialog() == true)
+            {
+                ValueToFind = window.uxValueToFind.Text;
+                LoadCards();
+            }
+        }
+
+        private void uxSearchByCardFranchise_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SearchByCardNumber(SearchBy.CardFranchise);
+            SearchFilterType = SearchBy.CardFranchise;
+
+            if (window.ShowDialog() == true)
+            {
+                ValueToFind = window.uxValueToFind.Text;
+                LoadCards();
+            }
+        }
+
+        private bool CardNumberFilter(object item)
+        {
+            if (string.IsNullOrEmpty(ValueToFind))
+                return true;
+            else
+                return (item as CardModel).CardNumber.ToString().IndexOf(ValueToFind, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private bool CardTitleFilter(object item)
+        {
+            if (string.IsNullOrEmpty(ValueToFind))
+                return true;
+            else
+                return (item as CardModel).Title.IndexOf(ValueToFind, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private bool CardFranchiseFilter(object item)
+        {
+            if (string.IsNullOrEmpty(ValueToFind))
+                return true;
+            else
+                return (item as CardModel).CardFranchise.IndexOf(ValueToFind, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private void uxSearchClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            ValueToFind = string.Empty;
+            SearchFilterType = SearchBy.None;
+            LoadCards();
         }
     }
 }

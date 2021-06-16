@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TradingCardTracker"
+        xmlns:local="clr-namespace:TradingCardTracker" xmlns:models="clr-namespace:TradingCardTracker.Models" d:DataContext="{d:DesignInstance Type=models:CardModel}"
         mc:Ignorable="d"
         Title="Trading Card Details" Height="450" Width="800"
         FocusManager.FocusedElement="{Binding ElementName=uxTitle}"
@@ -25,8 +25,23 @@
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Margin" Value="0,3,10,0"/>
             <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="18" Height="18" CornerRadius="10"
+                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
-
+        
         <Style TargetType="TextBox" x:Key="NotesInput">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="BlanchedAlmond"/>
@@ -44,6 +59,21 @@
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Margin" Value="0,3,10,0"/>
             <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="18" Height="18" CornerRadius="10"
+                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         
         <Style TargetType="TextBlock" x:Key="InputError">
@@ -52,8 +82,47 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Red"/>
             <Setter Property="Margin" Value="0,3,10,0"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="18" Height="18" CornerRadius="10"
+                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <Style TargetType="{x:Type TextBox}" x:Key="FancyInputError" BasedOn="{StaticResource StandardInput}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="BlanchedAlmond"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="0,3,10,0"/>
+            <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="18" Height="18" CornerRadius="10"
+                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="{x:Type Button}" x:Key="StandardButton">
             <Setter Property="Width" Value="100" />
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -67,53 +136,103 @@
             <StackPanel Margin="10,0,10,5">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Title:</TextBlock>
-                    <TextBox x:Name="uxTitle" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="350" Style="{StaticResource StandardInput}" />
-                    <TextBlock x:Name="uxTitleError" Text="{Binding TitleError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
-                </StackPanel>        
+                    <TextBox x:Name="uxTitle" 
+                             Text="{
+                                    Binding Title, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    ValidatesOnDataErrors=True
+                                    }" 
+                             Style="{StaticResource StandardInput}"
+                             ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                             Width="350" 
+                             MaxLength="255" 
+                             />
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Franchise:</TextBlock>
-                    <TextBox x:Name="uxFranchise" Width="350" Text="{Binding CardFranchise}" Style="{StaticResource StandardInput}" />
+                    <TextBox x:Name="uxFranchise" Width="350" 
+                             Text="{Binding CardFranchise}" 
+                             Style="{StaticResource StandardInput}" 
+                             MaxLength="255"
+                             />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Number:</TextBlock>
-                    <TextBox x:Name="uxCardNumber" Text="{Binding CardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Style="{StaticResource StandardInput}" />
-                    <TextBlock x:Name="uxCardNumberError" Text="{Binding CardNumberError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
+                    <local:NumericTextBox x:Name="uxCardNumber" 
+                                          Text="{Binding CardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                          Style="{StaticResource StandardInput}" 
+                                          MaxLength="4"
+                                          />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}" >Release Year:</TextBlock>
-                    <TextBox x:Name="uxReleaseYear" Text="{Binding ReleaseYear}" Style="{StaticResource StandardInput}"/>
+                    <local:NumericTextBox x:Name="uxReleaseYear" 
+                                          Text="{Binding ReleaseYear}" 
+                                          Style="{StaticResource StandardInput}"
+                                          MaxLength="4"
+                                          />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Number of Cards:</TextBlock>
-                    <TextBox x:Name="uxCardCount" Text="{Binding CardCount}" Style="{StaticResource StandardInput}" />
+                    <local:NumericTextBox x:Name="uxCardCount" 
+                                          Text="{Binding CardCount}" 
+                                          Style="{StaticResource StandardInput}" 
+                                          MaxLength="4"
+                                          />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Dollar Value:</TextBlock>
-                    <TextBox x:Name="uxValue" Text="{Binding Value}" Style="{StaticResource StandardInput}" />
+                    <local:DecimalTextBox x:Name="uxValue" 
+                                          Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                          Style="{StaticResource StandardInput}" 
+                                          MaxLength="7"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Condition:</TextBlock>
                     <ComboBox x:Name="uxCondition" IsEditable="False" Text="Card Condition" 
                               SelectedItem="{Binding Path=CardCondition, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                              Style="{StaticResource ComboInput}" />
-                    <TextBlock x:Name="uxCardConditionError" Text="{Binding ConditionError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
+                              Style="{StaticResource ComboInput}" 
+                              />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Card Type:</TextBlock>
                     <ComboBox x:Name="uxCardType" IsEditable="False" Text="Card Type" 
                               SelectedItem="{Binding Path=TypeOfCard, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                              Style="{StaticResource ComboInput}" />
-                    <TextBlock x:Name="uxTypeOfCardError" Text="{Binding TypeOfCardError, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputError}" />
+                              Style="{StaticResource ComboInput}" 
+                              />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource LabelText}">Notes:</TextBlock>
-                    <TextBox x:Name="uxNotes" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Notes}" Style="{StaticResource NotesInput}" />
+                    <TextBox x:Name="uxNotes" AcceptsReturn="True" TextWrapping="Wrap" 
+                             Text="{Binding Notes}" 
+                             Style="{StaticResource NotesInput}"
+                             MaxLength="255"
+                             />
                 </StackPanel>
             </StackPanel>
         </GroupBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="uxUpload" Style="{StaticResource ResourceKey=StandardButton}" Click="uxUpload_Click">Upload Image</Button>
-                <Button x:Name="uxSubmit" Style="{StaticResource ResourceKey=StandardButton}" Click="uxSubmit_Click">Save</Button>
+            <Button x:Name="uxSubmit" Content="Save" 
+                    Click="uxSubmit_Click" IsDefault="True">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=uxTitle}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=uxCardNumber}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=uxValue}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=uxCondition}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=uxCardType}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+            </Button>
                 <Button x:Name="uxCancel" Style="{StaticResource ResourceKey=StandardButton}" Click="uxCancel_Click">Cancel</Button>
             </StackPanel>
     </StackPanel>

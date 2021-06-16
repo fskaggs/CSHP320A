@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradingCardTracker"
         mc:Ignorable="d"
-        Title="Trading Card Tracker" Height="465" Width="800">
+        Title="Trading Card Tracker" Height="465" Width="800" ResizeMode="NoResize">
 
     <Window.Resources>
         <Style TargetType="ListViewItem">
@@ -46,11 +46,22 @@
                 <MenuItem x:Name="uxFileNew"    Header="_New"    Click="uxFileNew_Click" />
                 <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxFileDelete_Click" Loaded="uxFileDelete_Loaded" />
                 <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxFileChange_Click" Loaded="uxFileChange_Loaded" />
+                <MenuItem x:Name="uxFileExit"   Header="_Exit"   Click="uxFileExit_Click" />
+            </MenuItem>
+            <MenuItem Header="_Search">
+                <MenuItem x:Name="uxSearchByCardNumber"    Header="By Card Number" Click="uxSearchByCardNumber_Click" />
+                <MenuItem x:Name="uxSearchByCardFranchise" Header="By Franchise"   Click="uxSearchByCardFranchise_Click" />
+                <MenuItem x:Name="uxSearchByCardTitle"     Header="By Title"       Click="uxSearchByCardTitle_Click" />
+                <Separator/>
+                <MenuItem x:Name="uxSearchClearFilter"     Header="Clear Search Filter" Click="uxSearchClearFilter_Click" />
             </MenuItem>
         </Menu>
 
         <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="5,5,5,5">
-            <ListView x:Name="uxCardList" Height="150" SelectionChanged="uxCardList_SelectionChanged" MouseDoubleClick="uxFileChange_Click">
+            <ListView x:Name="uxCardList" Height="150" 
+                      SelectionChanged="uxCardList_SelectionChanged" 
+                      MouseDoubleClick="uxFileChange_Click" 
+                      Loaded="uxCardList_Loaded">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -61,6 +72,10 @@
                         <MenuItem x:Name="uxContextFileNew"    Header="_New" Click="uxFileNew_Click"/>
                         <MenuItem x:Name="uxContextFileChange" Header="_Modify" Click="uxFileChange_Click"  Loaded="uxFileChange_Loaded"/>
                         <MenuItem x:Name="uxContextFileDelete" Header="_Delete" Click="uxFileDelete_Click"  Loaded="uxFileDelete_Loaded" />
+                        <Separator/>
+                        <MenuItem x:Name="uxContextSearchByCardNumber"    Header="Search By Card Number" Click="uxSearchByCardNumber_Click" />
+                        <MenuItem x:Name="uxContextSearchByCardFranchise" Header="Search By Franchise"   Click="uxSearchByCardFranchise_Click" />
+                        <MenuItem x:Name="uxContextSearchByCardTitle"     Header="Search By Title"       Click="uxSearchByCardTitle_Click" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.Resources>
@@ -96,7 +111,7 @@
                     <GridView x:Name="uxGridView">
                         <GridViewColumn CellTemplate="{StaticResource ResourceKey=CellCardNumber}" Width="60">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Tag="CardNumber" Click="uxCardsColumnHeader_Click" Width="60">Card</GridViewColumnHeader>
+                                <GridViewColumnHeader Tag="CardNumber" Click="uxCardsColumnHeader_Click" Width="60" Content="Card"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn x:Name="uxGvTitle" DisplayMemberBinding="{Binding Title}" Width="175">
@@ -177,6 +192,10 @@
                 </GroupBox>
             </StackPanel>
         </StackPanel>
-        <StatusBar DockPanel.Dock="Bottom" Name="uxStatusBar"/>
+        <StatusBar DockPanel.Dock="Bottom" Name="uxStatusBar">
+            <StatusBarItem>
+                <TextBlock x:Name="uxCardsLoaded"/>
+            </StatusBarItem>
+        </StatusBar>
     </DockPanel>
 </Window>

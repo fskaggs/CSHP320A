@@ -49,6 +49,20 @@ namespace TradingCardTracker.Models
             }
         }
 
+        string cardValueError;
+        public string CardValueError
+        {
+            get { return cardValueError; }
+            set
+            {
+                if (cardValueError != value)
+                {
+                    cardValueError = value;
+                    InvokePropertyChanged("CardValueError");
+                }
+            }
+        }
+
         string conditionError;
         public string ConditionError
         {
@@ -106,6 +120,15 @@ namespace TradingCardTracker.Models
                             TypeOfCardError = string.Empty;
                             if (TypeOfCard == CardType.Unknown) { TypeOfCardError = "Type of card selection required"; }
                             return TypeOfCardError;
+                        }
+                    case "Value":
+                        {
+                            CardValueError = string.Empty;
+                            if (!(Value >= Decimal.Zero) && (Value <= 2500.00M))
+                            { 
+                                CardValueError = "Price or value of card must be greater than or equal to $0.00 and less than $2500"; 
+                            }
+                            return CardValueError;
                         }
                 }
 
